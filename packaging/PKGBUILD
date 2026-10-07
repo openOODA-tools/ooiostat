@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=ooiostat-bin
+_pkgname=ooiostat
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Monitors storage device read/write throughput, service times, and queue latency."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/ooiostat"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('ooiostat')
+conflicts=('ooiostat')
+source_x86_64=("${url}/releases/download/v${pkgver}/ooiostat-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/ooiostat-linux-x86_64" "${pkgdir}/usr/bin/ooiostat"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/ooiostat-uninstall"
+}
